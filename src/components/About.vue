@@ -9,7 +9,7 @@
     name: 'about',
     data () {
       return {
-        msg: 'This is About page'
+        msg: 'This is About page. I have changed'
       }
     }
   }
