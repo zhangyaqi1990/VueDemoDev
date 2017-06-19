@@ -15,11 +15,6 @@ export default new Router({
       component: Hello
     },
     {
-      path: '/about',
-      name: 'About',
-      component: About
-    },
-    {
       path: '/datepicker',
       name: 'DatePicker',
       component: DateTimePicker
@@ -28,6 +23,11 @@ export default new Router({
       path: '/tool-sites',
       name: 'ToolSites',
       component: ToolSites
+    },
+    {
+      path: '/about',
+      name: 'About',
+      component: About
     }
   ]
 })

@@ -1,7 +1,7 @@
 <template>
   <div class="ToolSites">
     <!--<div>{{ toolSites }}</div>-->
-    <p v-for="toolSite in toolSites"><a :href="toolSite.url">{{toolSite.name}}</a></p>
+    <p v-for="toolSite in toolSites"><a :href="toolSite.url" target="_blank">{{toolSite.name}}</a></p>
     <!--<a class="waves-effect waves-light btn">button</a>-->
   </div>
 </template>

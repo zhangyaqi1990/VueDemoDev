@@ -2,16 +2,27 @@
   <div id="app">
     <!--<div>{{$router.options}}</div>-->
     <!--<img src="./assets/logo.png">-->
-    <mu-appbar :title="SiteTitle">
-      <mu-text-field icon="search" class="appbar-search-field" slot="right" hintText="search here"/>
-      <mu-flat-button color="white" label="What's up man" slot="right"/>
+    <mu-appbar class="custom-appbar" :title="SiteTitle">
+      <!--<div slot="right">{{theme}}</div>-->
+      <!--<mu-icon-menu icon="more_vert" slot="right" :value="theme" @change="handleThemeChange">-->
+      <!--<mu-menu-item :value="theme" v-for="(theme, index) in themes" :key="theme.id" :title="theme"/>-->
+      <!--</mu-icon-menu>-->
     </mu-appbar>
-    <mu-tabs :value="activeTab" @change="handleTabChange">
-      <mu-tab :value="index" v-for="(option, index) in options" :key="option.id" :title="option.name"/>
-    </mu-tabs>
-    <keep-alive>
-      <router-view></router-view>
-    </keep-alive>
+    <mu-drawer :open="true" :docked="true">
+      <mu-appbar>
+      </mu-appbar>
+      <mu-list>
+        <mu-list-item v-for="(option, index) in options" :key="option.id" :title="option.name" @click="handleMenuChange(option)"></mu-list-item>
+      </mu-list>
+    </mu-drawer>
+
+    <div>A study project</div>
+
+    <div class="custom-content">
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
+    </div>
   </div>
 </template>
 
@@ -21,49 +32,32 @@
     data () {
       return {
         SiteTitle: `Garry's small tools`,
-        options: this.$router.options.routes,
-        activeTab: 0
+        options: this.$router.options.routes
       }
     },
     methods: {
-      handleTabChange (value) {
-//        console.log(value)
-        this.activeTab = value
-        this.$router.push(this.options[value].path)
+      handleMenuChange (option) {
+//        console.log(option)
+        this.$router.push(option.path)
       }
     }
   }
 </script>
 
-<!--<style>-->
-<!--#app {-->
-<!--font-family: 'Avenir', Helvetica, Arial, sans-serif;-->
-<!-- -webkit-font-smoothing: antialiased;-->
-<!-- -moz-osx-font-smoothing: grayscale;-->
-<!--/*text-align: center;*/-->
-<!--/*color: #2c3e50;*/-->
-<!--/*margin-top: 20px;*/-->
-<!--}-->
-<!--</style>-->
-<style lang="less">
-  .appbar-search-field {
-    color: #FFF;
-    margin-bottom: 0;
-    &.focus-state {
-      color: #FFF;
-    }
-    .mu-text-field-hint {
-      color: fade(#FFF, 54%);
-    }
-    .mu-text-field-input {
-      color: #FFF;
-    }
-    .mu-text-field-focus-line {
-      background-color: #FFF;
-    }
+<style lang="css">
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-    .mu-text-field-icon {
-      color: #FFF;
-    }
+  .custom-appbar {
+    position: fixed;
+    left:256px;
+  }
+
+  .custom-content{
+    padding-left: 280px;
+    padding-top:60px;
   }
 </style>
